@@ -1,0 +1,141 @@
+html {
+    box-sizing: border-box;
+}
+
+*, ::before, ::after {
+    box-sizing: inherit;
+}
+
+html, body {
+    margin: 0;
+}
+
+body {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    max-width: 350px;
+    margin: 0 auto;
+    background-color: #fafafa;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    padding: 25px 0;
+    font-size: 20px;
+}
+
+main {
+    padding: 10px 40px;
+}
+
+.todo-app {
+    background-color: #fff;
+    box-shadow: 0 2px 4px #0003, 0 25px 50px #0000001a;
+}
+
+#todo-input {
+    height: 65px;
+    width: 100%;
+    font-size: 16px;
+    padding: 0 20px;
+    border: 0;
+    font-family: inherit;
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+ul > li {
+    border-top: 1px solid #ededed;
+    overflow: hidden;
+    max-height: 80px;
+    transition: max-height .1s linear;
+
+    &.deleting, &.adding {
+        max-height: 0;
+        margin: 0;
+        border: none;
+    }
+}
+
+li > .item {
+    padding: 25px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item > .title {
+    display: flex;
+    gap: 15px;
+}
+
+.title > label {
+    flex-grow: 1;
+    position: relative;
+
+    &::after {
+        content: ' ';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        height: 1px;
+        background-color: #000;
+    }
+
+    &.pending::after {
+        animation: unstrike .1s linear both;
+    }
+
+    &.completed::after {
+        animation: strike .1s linear both;
+    }
+}
+
+.title > .hidden {
+    display: none;
+}
+
+@media (width >= 1250px) {
+    .item > .remove {
+        visibility: hidden;
+    }
+
+    li:hover .remove {
+        visibility: visible;
+    }
+}
+
+.remove {
+    cursor: pointer;
+    font-size: 16px;
+    border: 0;
+    background: none;
+}
+
+@keyframes strike {
+    from {
+        width: 0
+    }
+    to {
+        width: 100%
+    }
+}
+
+@keyframes unstrike {
+    from {
+        width: 100%
+    }
+    to {
+        width: 0
+    }
+}
