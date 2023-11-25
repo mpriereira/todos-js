@@ -30,13 +30,9 @@ npm run build
 
 ### 🧪 Tests
 
-To run the tests available in this project thanks to Docker, multiple commands are available :
+There are a couple of e2e tests done with Cypress:
 
 ```bash
-# Unit tests
-npm run test
-
-# e2e tests with Cypress
 npm run cy:open
 npm run cy:run
 ```
