@@ -35,6 +35,7 @@ body {
 
 main {
     padding: 10px 40px;
+    max-width: inherit;
 }
 
 .todo-app {
@@ -51,19 +52,20 @@ main {
     margin-bottom: 0;
 }
 
-ul {
+#todo-list {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-ul > li {
+#todo-list > li {
     border-top: 1px solid var(--muted-border-color);
     overflow: hidden;
     max-height: 80px;
     transition: max-height .1s linear;
+    list-style: none;
 
-    &.edit {
+    &.editing {
         pointer-events: none;
     }
 
@@ -72,6 +74,28 @@ ul > li {
         margin: 0;
         border: none;
     }
+}
+
+li.editing > .item *:not(.title, .edit-input) {
+    opacity: .5;
+}
+
+li.editing .title {
+    flex-grow: 1;
+}
+
+li.editing .edit-input {
+    display: initial;
+    width: 100%;
+    pointer-events: auto;
+}
+
+li.editing label {
+    display: none;
+}
+
+li.editing .remove {
+    visibility: visible;
 }
 
 li > .item {
@@ -85,15 +109,19 @@ li > .item {
     display: flex;
     gap: 15px;
     align-items: center;
+    overflow-x: hidden;
 }
 
 .title > input[type="checkbox"] {
-    border: 1px solid var(--color);
+    flex-shrink: 0;
 }
 
 .title > label {
     flex-grow: 1;
     position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 
     &::after {
         content: ' ';
@@ -104,21 +132,12 @@ li > .item {
         background-color: var(--color);
     }
 
-    &.pending::after {
-        animation: unstrike .1s linear both;
-    }
-
     &.completed::after {
         animation: strike .1s linear both;
     }
 }
 
-.title > .edit {
-    width: auto;
-    pointer-events: auto;
-}
-
-.title > .hidden {
+.title > .edit-input {
     display: none;
 }
 
@@ -137,6 +156,7 @@ li > .item {
     height: 25px;
     background: var(--icon-close) no-repeat;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 @keyframes strike {
@@ -145,14 +165,5 @@ li > .item {
     }
     to {
         width: 100%
-    }
-}
-
-@keyframes unstrike {
-    from {
-        width: 100%
-    }
-    to {
-        width: 0
     }
 }

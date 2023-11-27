@@ -62,31 +62,25 @@ export class TodoElement {
     setupLabels() {
         this.labelElement.className = this.checkboxElement.checked ? 'completed' : 'pending';
         this.labelElement.textContent = this.todo.name;
-        this.labelInputElement.className = 'edit';
-        this.labelInputElement.classList.add('hidden');
+        this.labelInputElement.className = 'edit-input';
+        this.labelInputElement.setAttribute('type', 'text');
         this.labelInputElement.value = this.todo.name;
         this.labelElement.addEventListener('click', () => {
-            this.listItemElement.classList.toggle('edit');
-            this.labelElement.classList.toggle('hidden');
-            this.labelInputElement.classList.toggle('hidden');
+            this.listItemElement.classList.toggle('editing');
             this.labelInputElement.focus();
         });
 
         this.labelInputElement.addEventListener('keyup', (ev) => {
             switch (ev.key) {
             case 'Enter':
-                this.listItemElement.classList.toggle('edit');
+                this.listItemElement.classList.toggle('editing');
                 this.labelElement.textContent = this.labelInputElement.value;
-                this.labelElement.classList.toggle('hidden');
-                this.labelInputElement.classList.toggle('hidden');
 
                 this.todo.name = this.labelInputElement.value;
                 editTodo({ ...this.todo, name: this.labelInputElement.value });
                 break;
             case 'Escape':
-                this.listItemElement.classList.toggle('edit');
-                this.labelElement.classList.toggle('hidden');
-                this.labelInputElement.classList.toggle('hidden');
+                this.listItemElement.classList.toggle('editing');
                 this.labelInputElement.value = this.todo.name;
                 break;
             }
