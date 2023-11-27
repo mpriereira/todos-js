@@ -40,5 +40,8 @@
   "browserslist": [
     "defaults",
     "not IE 11"
-  ]
+  ],
+  "dependencies": {
+    "@picocss/pico": "^1.5.10"
+  }
 }

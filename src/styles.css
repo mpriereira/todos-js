@@ -1,13 +1,9 @@
-html {
-    box-sizing: border-box;
-}
-
-*, ::before, ::after {
-    box-sizing: inherit;
-}
-
-html, body {
-    margin: 0;
+:root {
+    --font-size: 16px;
+    --spacing: .2rem;
+    --typography-spacing-vertical: 0;
+    --form-element-spacing-vertical: 0;
+    --form-element-spacing-horizontal: 0;
 }
 
 body {
@@ -18,14 +14,23 @@ body {
     grid-template-rows: auto 1fr;
     max-width: 350px;
     margin: 0 auto;
-    background-color: #fafafa;
 }
 
-header {
+.header {
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 15px;
     padding: 25px 0;
-    font-size: 20px;
+}
+
+.header > h3 {
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.header > input[role="switch"] {
+    margin-top: 5px;
 }
 
 main {
@@ -33,32 +38,34 @@ main {
 }
 
 .todo-app {
-    background-color: #fff;
-    box-shadow: 0 2px 4px #0003, 0 25px 50px #0000001a;
+    box-shadow: var(--card-box-shadow);
 }
 
 #todo-input {
     height: 65px;
     width: 100%;
-    font-size: 16px;
     padding: 0 20px;
     border: 0;
     font-family: inherit;
     text-align: center;
+    margin-bottom: 0;
 }
 
 ul {
     list-style: none;
     margin: 0;
     padding: 0;
-    font-size: 16px;
 }
 
 ul > li {
-    border-top: 1px solid #ededed;
+    border-top: 1px solid var(--muted-border-color);
     overflow: hidden;
     max-height: 80px;
     transition: max-height .1s linear;
+
+    &.edit {
+        pointer-events: none;
+    }
 
     &.deleting, &.adding {
         max-height: 0;
@@ -77,6 +84,11 @@ li > .item {
 .item > .title {
     display: flex;
     gap: 15px;
+    align-items: center;
+}
+
+.title > input[type="checkbox"] {
+    border: 1px solid var(--color);
 }
 
 .title > label {
@@ -89,7 +101,7 @@ li > .item {
         left: 0;
         top: 50%;
         height: 1px;
-        background-color: #000;
+        background-color: var(--color);
     }
 
     &.pending::after {
@@ -99,6 +111,11 @@ li > .item {
     &.completed::after {
         animation: strike .1s linear both;
     }
+}
+
+.title > .edit {
+    width: auto;
+    pointer-events: auto;
 }
 
 .title > .hidden {
@@ -116,10 +133,10 @@ li > .item {
 }
 
 .remove {
+    width: 25px;
+    height: 25px;
+    background: var(--icon-close) no-repeat;
     cursor: pointer;
-    font-size: 16px;
-    border: 0;
-    background: none;
 }
 
 @keyframes strike {

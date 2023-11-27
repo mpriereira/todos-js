@@ -1,6 +1,7 @@
 # todos-js
 
-`todos-js` is a vanilla JavaScript project that lets you easily define a list of todos.
+`todos-js` is a vanilla JavaScript project that lets you easily define a list of tasks (or todos).
+It uses [Pico.css](https://picocss.com/) for a minimalistic styling
 
 ### Installation
 
@@ -30,7 +31,7 @@ npm run build
 
 ### 🧪 Tests
 
-There are a couple of e2e tests done with Cypress:
+To execute the e2e tests with Cypress, run one of the following commands:
 
 ```bash
 npm run cy:open
